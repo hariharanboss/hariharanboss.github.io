@@ -7,7 +7,7 @@ Built for the situation where you have lost your phone, or simply cannot remembe
 anyone's number. No backend, no app to install, no account. Just a URL.
 
 ```
-https://<your-github-username>.github.io/getnumber/
+https://hariharanboss.github.io/
 ```
 
 ---
@@ -56,8 +56,8 @@ https://<your-github-username>.github.io/getnumber/
 ## Getting started
 
 ```bash
-git clone https://github.com/<you>/getnumber.git
-cd getnumber
+git clone https://github.com/hariharanboss/hariharanboss.github.io.git
+cd hariharanboss.github.io
 ```
 
 ### Run it locally
@@ -128,18 +128,19 @@ Print several copies. Keep one in your **wallet**, one in your **bag**, one in y
 ## Deploy to GitHub Pages
 
 ```bash
-git remote add origin https://github.com/<you>/getnumber.git
+git remote add origin https://github.com/hariharanboss/hariharanboss.github.io.git
 git push -u origin main
 ```
 
 Then in the repo: **Settings → Pages → Source: Deploy from a branch → `main` /
 `/ (root)` → Save**.
 
-Your site appears at `https://<you>.github.io/getnumber/` within a minute.
+Your site appears at `https://hariharanboss.github.io/` within a minute.
 
-> **Shorter URL?** If you create the repository as `getnumber.github.io` (your *user
-> site* repo), the address becomes `https://<you>.github.io/` — four characters
-> shorter to type in a panic.
+> This repository is your **user site** (the repo name matches your GitHub
+> username), which is why the address has no extra path in it. That keeps the
+> URL as short as possible — useful when you have to type it on someone else's
+> phone in a hurry.
 
 Finally, set **Edit → Site → This site's address** to your real URL so the printed
 QR code points to the right place.
