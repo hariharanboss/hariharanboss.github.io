@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto" data-text="normal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GetNumber — Emergency Info</title>
+<meta name="description" content="Find the right emergency number fast. Personal contact details, encrypted and locked.">
+<meta name="theme-color" content="#b91c1c">
+<meta name="color-scheme" content="dark light">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/themes.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body data-screen="lock">
+
+<!-- ═══════════════════════ LOCK SCREEN ═══════════════════════ -->
+<section id="lock" class="screen lock">
+  <div class="lock__inner">
+
+    <header class="lock__brand">
+      <img src="icons/icon.svg" alt="" class="lock__logo" width="56" height="56">
+      <div>
+        <h1 class="lock__title" id="lockTitle">GetNumber</h1>
+        <p class="lock__sub muted" id="lockSub">Emergency information — locked</p>
+      </div>
+    </header>
+
+    <!-- Public emergency numbers: callable BEFORE unlock -->
+    <div class="lock__soswrap" id="lockSos" hidden></div>
+
+    <!-- PIN entry -->
+    <form id="pinForm" class="pin" autocomplete="off" novalidate>
+      <label class="pin__label" for="pinInput">Enter your PIN</label>
+
+      <div class="pin__dots" id="pinDots" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <input id="pinInput" class="pin__input" type="password" inputmode="numeric"
+             pattern="[0-9]*" maxlength="6" autocomplete="off" autocapitalize="off"
+             spellcheck="false" aria-label="6 digit PIN">
+
+      <div class="passbox" id="passBox" hidden>
+        <input type="password" id="passInput" class="passinput" placeholder="Recovery passphrase"
+               autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Recovery passphrase">
+        <button type="button" class="btn btn--primary btn--sm" id="passSubmit">Unlock</button>
+        <button type="button" class="btn btn--ghost btn--sm" id="passCancel">Cancel</button>
+      </div>
+
+      <p class="pin__error" id="pinError" role="alert" hidden></p>
+
+      <div class="keypad" id="keypad">
+        <button type="button" class="key" data-k="1">1</button>
+        <button type="button" class="key" data-k="2">2</button>
+        <button type="button" class="key" data-k="3">3</button>
+        <button type="button" class="key" data-k="4">4</button>
+        <button type="button" class="key" data-k="5">5</button>
+        <button type="button" class="key" data-k="6">6</button>
+        <button type="button" class="key" data-k="7">7</button>
+        <button type="button" class="key" data-k="8">8</button>
+        <button type="button" class="key" data-k="9">9</button>
+        <button type="button" class="key key--muted" data-k="clear" aria-label="Clear">C</button>
+        <button type="button" class="key" data-k="0">0</button>
+        <button type="button" class="key key--muted" data-k="back" aria-label="Delete last digit">⌫</button>
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--block btn--lg" id="pinSubmit">Unlock</button>
+      <button type="button" class="btn btn--ghost btn--sm" id="pinHintBtn">Forgot your PIN?</button>
+      <button type="button" class="btn btn--ghost btn--sm" id="passModeBtn">Use recovery passphrase</button>
+      <p class="pin__hint" id="pinHint" hidden></p>
+    </form>
+
+    <!-- Everything else, kept out of the way so Unlock stays above the fold -->
+    <section class="lock__more" id="lockMore" hidden>
+      <details>
+        <summary>More emergency numbers</summary>
+        <div id="lockPublicGrid" class="pubgrid"></div>
+      </details>
+    </section>
+
+    <footer class="lock__foot">
+      <p class="muted tiny">Your details are encrypted on this device. Nothing is sent anywhere.</p>
+    </footer>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ APP ═══════════════════════ -->
+<main id="app" class="screen app" hidden>
+
+  <header class="appbar">
+    <div class="appbar__id">
+      <div class="avatar" id="hdrAvatar"><span id="hdrInitials">?</span></div>
+      <div class="appbar__names">
+        <h1 id="hdrName">—</h1>
+        <p class="muted" id="hdrMeta"></p>
+      </div>
+    </div>
+    <div class="appbar__tools">
+      <button class="iconbtn" id="btnText" title="Text size" aria-label="Text size">Aa</button>
+      <button class="iconbtn" id="btnTheme" title="Theme" aria-label="Toggle theme">◐</button>
+      <button class="iconbtn" id="btnLock" title="Lock now" aria-label="Lock now">🔒</button>
+    </div>
+  </header>
+
+  <div class="banner banner--warn" id="sampleBanner" hidden>
+    <span><strong>Sample data.</strong> Open <em>Edit</em> to put your real numbers in.</span>
+    <button class="btn btn--tiny" data-act="edit">Edit now</button>
+  </div>
+
+  <div class="banner banner--info" id="pendingBanner" hidden>
+    <span>Unpublished changes exist on this device. Download the updated vault to publish them.</span>
+    <button class="btn btn--tiny" data-act="backup">Backup</button>
+  </div>
+
+  <div class="wrap">
+
+    <!-- Identity -->
+    <section class="card card--id">
+      <div class="id__row">
+        <img class="id__photo" id="idPhoto" alt="" hidden>
+        <div class="id__info">
+          <h2 class="id__name" id="idName">—</h2>
+          <div class="id__chips" id="idChips"></div>
+        </div>
+      </div>
+      <div class="id__allergy" id="idAllergy" hidden></div>
+    </section>
+
+    <!-- Emergency -->
+    <section class="section">
+      <h2 class="section__title">Emergency</h2>
+      <a class="sos" id="sosMain" href="tel:112">
+        <span class="sos__icon">🚨</span>
+        <span class="sos__text">
+          <b id="sosNum">112</b>
+          <small id="sosLabel">All-in-one emergency</small>
+        </span>
+      </a>
+      <div class="grid grid--3" id="pubGrid"></div>
+      <details class="more-nums" id="pubMore" hidden>
+        <summary>More emergency numbers</summary>
+        <div class="grid grid--3" id="pubMoreGrid"></div>
+      </details>
+    </section>
+
+    <!-- Who to call for what -->
+    <section class="section">
+      <h2 class="section__title">Who to call for what</h2>
+      <ul class="directory" id="directory"></ul>
+    </section>
+
+    <!-- Contacts -->
+    <section class="section">
+      <h2 class="section__title">Contacts</h2>
+      <div class="contacts" id="contacts"></div>
+    </section>
+
+    <!-- Medical -->
+    <section class="section">
+      <h2 class="section__title">Medical</h2>
+      <div class="card" id="medical"></div>
+    </section>
+
+    <!-- Home & vehicle -->
+    <section class="section">
+      <h2 class="section__title">Home &amp; Vehicle</h2>
+      <div class="card" id="property"></div>
+    </section>
+
+    <!-- Notes -->
+    <section class="section">
+      <h2 class="section__title">Notes</h2>
+      <div class="card" id="notes"></div>
+    </section>
+
+    <p class="foot muted tiny">GetNumber · <span id="footUpdated"></span></p>
+  </div>
+
+  <nav class="tabbar">
+    <button class="tab" data-act="edit"><span>✎</span>Edit</button>
+    <button class="tab" data-act="print"><span>🖨</span>Print</button>
+    <button class="tab" data-act="backup"><span>⤓</span>Backup</button>
+    <button class="tab" id="btnInstall" data-act="install" hidden><span>＋</span>Install</button>
+  </nav>
+
+</main>
+
+<!-- ═══════════════════════ EDITOR ═══════════════════════ -->
+<div id="editor" class="sheet" hidden>
+  <header class="sheet__head">
+    <button class="iconbtn" data-act="editor-close" aria-label="Close">✕</button>
+    <h2>Edit details</h2>
+    <button class="btn btn--primary btn--sm" data-act="editor-save">Save</button>
+  </header>
+
+  <nav class="sheet__tabs" id="editorTabs"></nav>
+
+  <div class="sheet__body" id="editorBody"></div>
+
+  <footer class="sheet__foot">
+    <span class="muted tiny" id="editorStatus">Changes stay on this device until you publish them.</span>
+    <div class="sheet__foot-actions">
+      <button class="btn btn--ghost btn--sm" data-act="editor-reset">Reset sample</button>
+      <button class="btn btn--primary btn--sm" data-act="editor-save">Save changes</button>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════ BACKUP / SETTINGS ═══════════════════════ -->
+<div id="backup" class="sheet" hidden>
+  <header class="sheet__head">
+    <button class="iconbtn" data-act="backup-close" aria-label="Close">✕</button>
+    <h2>Backup &amp; security</h2>
+  </header>
+  <div class="sheet__body" id="backupBody"></div>
+</div>
+
+<!-- ═══════════════════════ PRINT ═══════════════════════ -->
+<div id="printModal" class="sheet" hidden>
+  <header class="sheet__head">
+    <button class="iconbtn" data-act="print-close" aria-label="Close">✕</button>
+    <h2>Print</h2>
+    <button class="btn btn--primary btn--sm" data-act="print-now">Print</button>
+  </header>
+  <div class="sheet__body" id="printOptions"></div>
+</div>
+
+<!-- Print-only output -->
+<div id="printRoot" aria-hidden="true"></div>
+
+<script src="js/crypto.js"></script>
+<script src="js/vault.js"></script>
+<script src="js/qr.js"></script>
+<script src="js/app.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/backup.js"></script>
+<script src="js/print.js"></script>
+<script src="js/boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "siteTitle": "GetNumber",
+  "siteTagline": "Emergency information — locked",
+  "pinHint": "",
+  "showOnLockScreen": true,
+  "emergencyNumbers": [
+    { "label": "All-in-one emergency", "number": "112", "icon": "🚨", "note": "", "public": true },
+    { "label": "Police", "number": "100", "icon": "🚓", "note": "", "public": true },
+    { "label": "Fire", "number": "101", "icon": "🚒", "note": "", "public": true },
+    { "label": "Ambulance", "number": "102", "icon": "🚑", "note": "", "public": true },
+    { "label": "Ambulance rural", "number": "108", "icon": "🚑", "note": "", "public": true },
+    { "label": "Women helpline", "number": "1091", "icon": "👩", "note": "", "public": true },
+    { "label": "Child helpline", "number": "1098", "icon": "👧", "note": "", "public": false },
+    { "label": "Mental health", "number": "14567", "icon": "🧠", "note": "Tele-MANAS, 24×7", "public": false },
+    { "label": "Cyber fraud", "number": "1933", "icon": "💳", "note": "", "public": false },
+    { "label": "Highway / towing", "number": "155214", "icon": "🛣", "note": "", "public": false },
+    { "label": "Coast Guard", "number": "1554", "icon": "🌊", "note": "", "public": false }
+  ]
+}

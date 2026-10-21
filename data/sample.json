@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "sample": true,
+    "updatedAt": "2026-10-21T00:00:00.000Z"
+  },
+  "settings": {
+    "siteUrl": "https://yourname.github.io/getnumber/",
+    "countryCode": "91",
+    "siteTitle": "GetNumber",
+    "siteTagline": "Emergency information — locked",
+    "pinHint": ""
+  },
+  "profile": {
+    "fullName": "Your Name",
+    "dob": "",
+    "bloodGroup": "B+",
+    "gender": "",
+    "nationality": "Indian",
+    "languages": "English",
+    "photo": "",
+    "allergies": ["Penicillin (sample — delete me)"],
+    "address": {
+      "line1": "",
+      "area": "",
+      "city": "",
+      "state": "",
+      "pincode": "",
+      "country": "India"
+    },
+    "landmark": "",
+    "emergencyNote": "This is sample data. Open Edit and replace every field with your real details."
+  },
+  "medical": {
+    "conditions": [],
+    "medications": [],
+    "doctor": { "name": "", "clinic": "", "phone": "" },
+    "hospital": { "name": "", "address": "", "phone": "" },
+    "insurance": { "provider": "", "policyNo": "", "phone": "" },
+    "notes": ""
+  },
+  "emergencyNumbers": [
+    { "label": "All-in-one emergency", "number": "112", "icon": "🚨", "note": "Police • Fire • Ambulance", "public": true },
+    { "label": "Police", "number": "100", "icon": "🚓", "note": "", "public": true },
+    { "label": "Fire", "number": "101", "icon": "🚒", "note": "", "public": true },
+    { "label": "Ambulance", "number": "102", "icon": "🚑", "note": "", "public": true },
+    { "label": "Ambulance (rural)", "number": "108", "icon": "🚑", "note": "", "public": true },
+    { "label": "Women helpline", "number": "1091", "icon": "👩", "note": "", "public": true },
+    { "label": "Child helpline", "number": "1098", "icon": "👧", "note": "", "public": false },
+    { "label": "Mental health", "number": "14567", "icon": "🧠", "note": "Tele-MANAS, 24×7", "public": false },
+    { "label": "Cyber fraud", "number": "1933", "icon": "💳", "note": "", "public": false },
+    { "label": "Highway / towing", "number": "155214", "icon": "🛣", "note": "", "public": false },
+    { "label": "Coast Guard", "number": "1554", "icon": "🌊", "note": "", "public": false }
+  ],
+  "directory": [
+    { "label": "Medical", "name": "Dr. Sample", "phone": "+91 98765 43210", "note": "Family doctor" },
+    { "label": "Child pickup", "name": "Sample Mum", "phone": "+91 98765 43211", "note": "" },
+    { "label": "Breakdown", "name": "Sample Ravi", "phone": "+91 98765 43212", "note": "Towing" }
+  ],
+  "contacts": [
+    {
+      "name": "Sample Mum",
+      "relation": "Mother",
+      "phone": "+91 98765 43211",
+      "altPhone": "",
+      "forWhat": ["Emergency", "Child pickup"],
+      "priority": 1,
+      "address": "",
+      "notes": "Sample contact — replace with a real number."
+    },
+    {
+      "name": "Sample Ravi",
+      "relation": "Friend",
+      "phone": "+91 98765 43212",
+      "altPhone": "",
+      "forWhat": ["Breakdown", "Emergency"],
+      "priority": 2,
+      "address": "",
+      "notes": ""
+    },
+    {
+      "name": "Sample Sister",
+      "relation": "Sister",
+      "phone": "+91 98765 43213",
+      "altPhone": "",
+      "forWhat": ["Emergency"],
+      "priority": 3,
+      "address": "",
+      "notes": ""
+    }
+  ],
+  "property": {
+    "home": {
+      "landlord": "",
+      "buildingManager": "",
+      "society": "",
+      "wifi": "",
+      "wifiHint": ""
+    },
+    "vehicle": {
+      "make": "",
+      "model": "",
+      "color": "",
+      "regNo": "",
+      "insurer": "",
+      "policyNo": "",
+      "towPhone": ""
+    },
+    "documents": {
+      "licenseNo": "",
+      "passportNo": "",
+      "aadhaarLast4": ""
+    }
+  },
+  "notes": [
+    { "text": "Replace this note with anything a helper should know." }
+  ]
+}

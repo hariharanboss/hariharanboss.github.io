@@ -1,0 +1,66 @@
+/* ==========================================================
+   GetNumber — themes.css
+   Dark (default) + light + accent variants.
+   ========================================================== */
+
+:root,
+html[data-theme="dark"] {
+  --bg: #0a0e1a;
+  --surface: #131a2c;
+  --surface-2: #1c2540;
+  --line: #243055;
+  --line-strong: #34406b;
+  --text: #eef2ff;
+  --muted: #96a3c7;
+  --accent: #38bdf8;
+  --danger: #f87171;
+  --ok: #4ade80;
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+html[data-theme="light"] {
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --surface-2: #eef1f8;
+  --line: #dfe4f0;
+  --line-strong: #c3cbdd;
+  --text: #131a2c;
+  --muted: #5c6784;
+  --accent: #0369a1;
+  --danger: #dc2626;
+  --ok: #16a34a;
+  --shadow: 0 10px 26px rgba(20,30,60,.12);
+}
+
+@media (prefers-color-scheme: light) {
+  html[data-theme="auto"] {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --surface-2: #eef1f8;
+    --line: #dfe4f0;
+    --line-strong: #c3cbdd;
+    --text: #131a2c;
+    --muted: #5c6784;
+    --accent: #0369a1;
+    --danger: #dc2626;
+    --ok: #16a34a;
+    --shadow: 0 10px 26px rgba(20,30,60,.12);
+  }
+}
+
+/* Slightly warmer emergency tint for the light theme */
+html[data-theme="light"] .lock {
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(220,38,38,.12), transparent 60%),
+    var(--bg);
+}
+html[data-theme="light"] .sos { box-shadow: 0 8px 26px rgba(220,38,38,.24); }
+
+/* Contrast boost in light mode for chips */
+html[data-theme="light"] .chip--blood { color: #991b1b; background: rgba(220,38,38,.12); }
+html[data-theme="light"] .chip--warn { color: #92400e; background: rgba(245,158,11,.18); }
+html[data-theme="light"] .id__allergy { color: #92400e; }
+html[data-theme="light"] .banner--warn { color: #92400e; background: rgba(245,158,11,.14); }
+html[data-theme="light"] .banner--info { color: #075985; background: rgba(56,189,248,.12); }
+html[data-theme="light"] .contact__tag { color: #075985; background: rgba(56,189,248,.14); }
+html[data-theme="light"] .callbtn--wa { color: #15803d; background: rgba(37,211,102,.14); }
